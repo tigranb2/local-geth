@@ -1,5 +1,13 @@
 # local-geth
 ## Running
+# Init 
+Go to this directory and use the following commands to initialize geth (use the password 1234):
+```
+geth --datadir node1 account new
+geth --datadir node2 account new
+geth --datadir node1 init genesis.json
+geth --datadir node2 init genesis.json
+```
 
 # Booting the nodes
 Open terminal to this directory and type to start the bootnode:
@@ -12,6 +20,7 @@ node1 starts off mining. Start the node by typing the following into a new termi
 ./node1.sh
 ```
 
+Let it mine a little, so that you have some ether to send in a transaction
 To stop it from mining, type:
 ```
 miner.stop()

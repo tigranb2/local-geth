@@ -1,1 +1,61 @@
 # local-geth
+## Running
+
+# Booting the nodes
+Open terminal to this directory and type to start the bootnode:
+```
+./bootnode.sh
+```
+
+node1 starts off mining. Start the node by typing the following into a new terminal instance:
+```
+./node1.sh
+```
+
+To stop it from mining, type:
+```
+miner.stop()
+```
+
+To connect node2, type the following in a new terminal instance:
+```
+./node2.sh
+```
+
+# Connecting the nodes
+In node2, type: 
+```
+admin.nodeInfo.enode
+```
+Copy the output, and run the following in node1:
+```
+admin.addPeer(<copied string>)
+```
+
+# Sending the transaction
+In node2, type the following to get the hash of the account on node2, and copy it:
+```
+eth.accounts[0]
+```
+
+In node1, you can now send a transaction to node2:
+```
+eth.sendTransaction({from:eth.accounts[0],to:<node2 account hash>,value:1,data:web3.toHex(<any string>)})
+```
+
+Copy the output string, as this is the hash of the transaction.
+
+Restart mining in node1 for a minute or so (you can stop it after the transaction has been mined):
+```
+miner.start()
+```
+
+In node2, type the following to save the transaction's input data as a variable and convert the hash to Utf8:
+```
+tx = getTransaction(<transaction hash>).input
+web3.toUtf8(tx)
+```
+
+
+
+

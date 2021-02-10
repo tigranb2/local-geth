@@ -20,7 +20,7 @@ node1 starts off mining. Start the node by typing the following into a new termi
 ./node1.sh
 ```
 
-Let it mine a little, so that you have some ether to send in a transaction
+Let it mine a little, so that you have some ether to send in a transaction.    
 To stop it from mining, type:
 ```
 miner.stop()

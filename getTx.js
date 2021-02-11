@@ -9,7 +9,7 @@ function getTx(range) {
         var block = eth.getBlock(i, true);
         if (block.transactions != null) {
             block.transactions.forEach(function (tx) {
-              console.log("tx hash: " + tx.hash + "\nTO: " + tx.to + "\nFROM: " + tx.from + "\nDATA: " + web3.toUtf8(tx.input) + "\n");
+              console.log("tx hash: " + tx.hash + "\nFROM: " + tx.from + "\nTO: " + tx.to + "\nDATA: " + web3.toUtf8(tx.input) + "\n");
             })
         }
     }

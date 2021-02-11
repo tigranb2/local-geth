@@ -65,6 +65,14 @@ tx = getTransaction(<transaction hash>).input
 web3.toUtf8(tx)
 ```
 
-
+##
+# getTX.js
+In a node, type:
+```
+loadScript("getTX.js")
+getTx(range)
+```
+range denotes the number of blocks before the current block. If you enter 1000, it will return all transactions within 1000 blocks from the latest block.   
+If no range is entered, a defaut value of 500 is used. That means the blockchain must atleast be 500 blocks long.   
 
 

@@ -71,13 +71,18 @@ In a new terminal instance, type
 ```
 ./saveTx.sh range node
 ```
-range is an optional positve integer that denotes how many blocks before the current block to start checking transactions from. Default value is 500.    
-node is an optional parameter that denotes which node to connect to. Leave blank to connect to node1. *The node you are connecting to must be online.*     
+range is an optional positve integer that denotes how many blocks before the current block to start checking transactions from. Default value is 500.       
+       
+       
+node is an optional parameter that denotes which node to connect to. Leave blank to connect to node1.    
+*The node you are connecting to must be online.*        
 node should be in the following format:
 ```
 http://rpcaddr:rpcport
 ```
-rpcaddr and rpcport are defined in node1.sh and node2.sh    
+rpcaddr and rpcport are defined in node1.sh and node2.sh        
+
+The output goes to ./log.txt.      
 # getTX.js 
 In a node, type:
 ```

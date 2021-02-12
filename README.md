@@ -72,7 +72,7 @@ In a new terminal instance, type
 ./saveTx.sh range node
 ```
 range is an optional positve integer that denotes how many blocks before the current block to start checking transactions from. Default value is 500.    
-node is an optional parameter that denotes which node to connect to. Default value connects to node1. 
+node is an optional parameter that denotes which node to connect to. Leave blank to connect to node1. 
 node should be in the following format:
 ```
 http://rpcaddr:rpcport

@@ -1,6 +1,6 @@
 # local-geth
-## Running
-# Init 
+# Running
+## Initializing
 Go to this directory and use the following commands to initialize geth (use the password 1234):
 ```
 geth --datadir node1 account new
@@ -9,7 +9,7 @@ geth --datadir node1 init genesis.json
 geth --datadir node2 init genesis.json
 ```
 
-# Booting the nodes
+## Booting the nodes
 Open terminal to this directory and type to start the bootnode:
 ```
 ./bootnode.sh
@@ -31,7 +31,7 @@ To connect node2, type the following in a new terminal instance:
 ./node2.sh
 ```
 
-# Connecting the nodes
+## Connecting the nodes
 In node2, type: 
 ```
 admin.nodeInfo.enode
@@ -65,8 +65,8 @@ tx = getTransaction(<transaction hash>).input
 web3.toUtf8(tx)
 ```
 
-##
-# saveTx.sh
+# Viewing transaction data
+## saveTx.sh
 In a new terminal instance, type
 ```
 ./saveTx.sh range node
@@ -83,7 +83,7 @@ http://rpcaddr:rpcport
 rpcaddr and rpcport are defined in node1.sh and node2.sh        
 
 The output goes to ./log.txt.      
-# getTX.js 
+## getTX.js 
 In a node, type:
 ```
 loadScript("getTX.js")

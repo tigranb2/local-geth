@@ -66,7 +66,19 @@ web3.toUtf8(tx)
 ```
 
 ##
-# getTX.js
+# saveTx.sh
+In a new terminal instance, type
+```
+./saveTx.sh range node
+```
+range is an optional value that denotes how many blocks before the current block to start checking transactions from. Default value is 500.    
+node is an optional value that denotes which node to connect to. Default value connects to node1. 
+node should be in the following format:
+```
+http://rpcaddr:rpcport
+```
+rpcaddr and rpcport are defined in node1.sh and node2.sh    
+# getTX.js 
 In a node, type:
 ```
 loadScript("getTX.js")

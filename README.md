@@ -83,18 +83,19 @@ http://rpcaddr:rpcport
 rpcaddr and rpcport are defined in node1.sh and node2.sh        
 
 The output goes to ./log.txt.      
-## getTX.js 
+## getTX.js
+getTx returns all transactions within a specified range, displaying the transaction hash, sender, reciever, and data.     
+If a range is provided, getTx will return all transactions (range) blocks from the latest block. If none is provided, getTx will return all transactions 500 blocks from the latest block. If the blockchain is shorter than 500 blocks, all transactions in the blockchain are returned.      
 In a node, type:
 ```
 loadScript("getTX.js")
 getTx(range)
 ```
-range denotes the number of blocks before the current block. If you getTx(1000), it will return all transactions within 1000 blocks from the latest block.   
-If no range is entered, a defaut value of 500 is used. That means the blockchain must atleast be 500 blocks long.   
 
 ## checkTx.js
-checkTx.js will run getTx.js everytime a new transaction is mined, displaying all transactions from the last 500 blocks.      
-getTx.js will need to be loaded in.      
+checkTx.js checks each new block, and runs getTx() if the block contains at least one transaction.     
+getTx() will display all the transactions from the last 500 blocks (or the entire blockchain, if it's less than 500 blocks long).     
+Note: getTx.js will need to be loaded in.      
 ```
 loadScript("checkTx.js")
 ```

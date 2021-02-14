@@ -1,8 +1,10 @@
 function getTx(range) {
-    if (range != null && range >= 1) {
-        var startingBlock = eth.blockNumber - range;
+    range = (range === undefined) ? 500 : range; //if the range is undefined, set it to 500
+
+    if (range >= eth.blockNumber) { //the starting block (eth.blockNumber - range) can not be less than 1
+        var startingBlock = 1 //check the whole chain for transactions
     } else {
-        var startingBlock = eth.blockNumber - 500; //if no range is provided, start checking for transactions 500 block from the latest block
+        var startingBlock = eth.blockNumber - range;
     }
 
     for (var i = startingBlock; i <= eth.blockNumber; i++) {

@@ -92,4 +92,11 @@ getTx(range)
 range denotes the number of blocks before the current block. If you getTx(1000), it will return all transactions within 1000 blocks from the latest block.   
 If no range is entered, a defaut value of 500 is used. That means the blockchain must atleast be 500 blocks long.   
 
+## checkTx.js
+checkTx.js will run getTx.js everytime a new transaction is mined, displaying all transactions from the last 500 blocks.      
+getTx.js will need to be loaded in.      
+```
+loadScript("checkTx.js")
+```
+
 

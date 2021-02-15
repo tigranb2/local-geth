@@ -66,6 +66,16 @@ web3.toUtf8(tx)
 ```
 
 # Viewing transaction data
+## getTx-v2.js
+## checkTx.js
+checkTx.js checks each new block, and runs getTx() if the block contains at least one transaction.     
+getTx() will display all the transactions from the last 500 blocks (or the entire blockchain, if it's less than 500 blocks long).     
+Note: getTx.js will need to be loaded in.      
+```
+loadScript("checkTx.js")
+```
+
+
 ## saveTx.sh
 In a new terminal instance, type
 ```
@@ -90,14 +100,6 @@ In a node, type:
 ```
 loadScript("getTX.js")
 getTx(range)
-```
-
-## checkTx.js
-checkTx.js checks each new block, and runs getTx() if the block contains at least one transaction.     
-getTx() will display all the transactions from the last 500 blocks (or the entire blockchain, if it's less than 500 blocks long).     
-Note: getTx.js will need to be loaded in.      
-```
-loadScript("checkTx.js")
 ```
 
 

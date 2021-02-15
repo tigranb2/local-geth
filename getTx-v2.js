@@ -1,15 +1,20 @@
 module.exports = {getTx}; //export getTx() for use from other files
+var args = require('yargs').argv; //nodejs module for command line inputs
+var range = (args.range === undefined) ? 500 : args.range; //if --range is undefined, set it to 500
+var connect = (args.connect === undefined) ? 'ws://localhost:8101' : args.connect; //if --connect is undefined, set it node1 addr:port
+var close = (args.close === undefined) ? false : args.close; //write --close in the command line for the file to automatically exit when done
+
 var Web3 = require('web3'); //nodejs module for web3
 var web3 = new Web3();
-web3.setProvider(new web3.providers.HttpProvider('http://localhost:8101')) //connect to specified node via RPC
+web3.setProvider(new web3.providers.WebsocketProvider(connect)) //connect to specified node via RPC
 
 fs = require('fs'); //nodejs module for writing to file system
-fs.unlink('log.txt', (_) => {}); //comment this line to keep the log file between uses
+fs.unlink('log.txt', (_) => {}); //deletes log file before use, comment this line to keep file between uses
+
 
 async function getTx(range) {
     var latestBlock = await web3.eth.getBlockNumber(); //async call for latest block number
 
-    range = (range === undefined) ? 500 : range; //if the range is undefined, set it to 500
     if (range >= latestBlock) { //the starting block (latestBlock - range) can not be less than 1
         var startingBlock = 1;
     } else {
@@ -27,6 +32,15 @@ async function getTx(range) {
             })
         }
     }
+
+    if(close){process.exit(0)}; //if --close is passed through cmd line, close the file
 }
 
-getTx();
+getTx(range);
+
+
+
+
+
+
+

@@ -9,7 +9,7 @@ var web3 = new Web3();
 web3.setProvider(new web3.providers.WebsocketProvider(connect)) //connect to specified node via RPC
 
 fs = require('fs'); //nodejs module for writing to file system
-fs.unlink('log.txt', (_) => {}); //deletes log file before use, comment this line to keep file between uses
+fs.unlink('./data/log.txt', (_) => {}); //deletes log file before use, comment this line to keep file between uses
 
 
 async function getTx(range) {
@@ -26,7 +26,7 @@ async function getTx(range) {
         if (block.transactions != null) {
             block.transactions.forEach(async function (tx) {
                 var txInfo = "tx hash: " + tx.hash + "\nFROM: " + tx.from + "\nTO: " + tx.to + "\nDATA: " + web3.utils.toUtf8(tx.input) + "\n\n";
-                fs.appendFileSync('log.txt', txInfo, (err) => { //synchronously writes to log.txt
+                fs.appendFileSync('./data/log.txt', txInfo, (err) => { //synchronously writes to ./data/log.txt
                     if (err) {return console.log(err);}
                 });
             })
@@ -37,10 +37,3 @@ async function getTx(range) {
 }
 
 getTx(range);
-
-
-
-
-
-
-

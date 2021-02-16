@@ -9,7 +9,7 @@ var web3 = new Web3();
 web3.setProvider(new web3.providers.WebsocketProvider(connect)) //connect to specified node via WebSocket
 
 fs = require('fs'); //nodejs module for writing to file system
-fs.unlink('log.txt', (_) => {}); //deletes log file before use, comment this line to keep file between uses
+fs.unlink('./data/log.txt', (_) => {}); //deletes log file before use, comment this line to keep file between uses
 
 async function checkTx() {
     var latestBlock = await web3.eth.getBlockNumber();

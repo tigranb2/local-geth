@@ -71,7 +71,7 @@ node getTx-v2.js --close --range --connect
 # getTx-v2 connects to node1's addr:port by default
 ```
 
-# checkTx-v2.js
+## checkTx-v2.js
 checkTx-v2 will automatically run getTx-v2 everytime a block with at least one transaction is mined.                       
 Make sure that the node whose transactions you want to get is running with a WebSocket address and port.                    
 Execute the following in a new terminal instance:

@@ -59,7 +59,7 @@ npm install yargs
 ```
 
 ## getTx-v2.js
-getTx-v2 returns all transactions on a node within a certain range and outputs them to log.txt.           
+getTx-v2 returns all transactions on a node within a certain range and outputs them to /data/log.txt.           
 Make sure that the node whose transactions you want to get is running with a WebSocket address and port.                   
 Execute the following in a new terminal instance:
 ```
@@ -68,7 +68,7 @@ node getTx-v2.js --close --range --connect
 # --range is an optional parameter that specifies how many blocks from the latest block to start mining from
 # range is set to 500 if no value is provided, or to the whole blockchain if a value greater than the chain length is provided
 # --connect is an optional parameter that specified the wsaddr:wsport of the node to connect to
-# getTx-v2 connects to node1's addr:port by default
+# connects to node1's addr:port by default
 ```
 
 ## checkTx-v2.js
@@ -80,5 +80,14 @@ node checkTx-v2.js --range --connect
 # --range is an optional parameter that specifies the range for getTx-v2
 # range is set to 10 if no value is provided
 # --connect is an optional parameter that specified the wsaddr:wsport of the node to connect to
-# checkTx-v2 connects to node1's addr:port by default
+# connects to node1's addr:port by default
+```
+
+## perfromance.js
+performance.js records the difference in time (milliseconds) between when a transaction is made and when it is mined.                                                        \
+The result is stored in /data/performance.txt
+```
+node performance.js --connect
+# --connect is an optional parameter that specified the wsaddr:wsport of the node to connect to
+# connects to node1's addr:port by default
 ```

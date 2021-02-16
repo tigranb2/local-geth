@@ -1,105 +1,84 @@
 # local-geth
 # Running
 ## Initializing
-Go to this directory and use the following commands to initialize geth (use the password 1234):
+It is important that node.js and npm are installed on the computer 
+
 ```
 geth --datadir node1 account new
 geth --datadir node2 account new
+# 1234 should be used as the password for both nodes
 geth --datadir node1 init genesis.json
 geth --datadir node2 init genesis.json
 ```
 
 ## Booting the nodes
-Open terminal to this directory and type to start the bootnode:
+To start the bootnode navigate to /local-geth and execute:
 ```
 ./bootnode.sh
 ```
 
-node1 starts off mining. Start the node by typing the following into a new terminal instance:
+Start the node by typing the following into a new terminal instance:
 ```
 ./node1.sh
-```
-
-Let it mine a little, so that you have some ether to send in a transaction.    
-To stop it from mining, type:
-```
-miner.stop()
-```
-
-To connect node2, type the following in a new terminal instance:
-```
-./node2.sh
+# node1 starts off mining
+# mining can be stopped with miner.stop()
+# inorder to call node2, call ./node2.sh
 ```
 
 ## Connecting the nodes
-In node2, type: 
+In order to peer the nodes together, you must provide one of the nodes' enode id to the other
+In one of the nodes, type:
 ```
 admin.nodeInfo.enode
-```
-Copy the output, and run the following in node1:
-```
+# copy the output
+# run the following in the other node
 admin.addPeer(<copied string>)
 ```
 
 # Sending the transaction
-In node2, type the following to get the hash of the account on node2, and copy it:
+Transactions are can be sent between accounts on two different nodes, given they are peered.
+Execute:
 ```
-eth.accounts[0]
-```
-
-In node1, you can now send a transaction to node2:
-```
-eth.sendTransaction({from:eth.accounts[0],to:<node2 account hash>,value:1,data:web3.toHex(<any string>)})
-```
-
-Copy the output string, as this is the hash of the transaction.
-
-Restart mining in node1 for a minute or so (you can stop it after the transaction has been mined):
-```
-miner.start()
+eth.sendTransaction({from:eth.accounts[0],to:<account hash>,value:1,data:web3.toHex(<any string>)})
+# the recepient's hash value can be obtained by typing eth.accounts[0] in the node with the recepient's account
+# any string can passed into the data field, and it will be converted to hex
+# the functions will copy the transaction's hash, save for use in viewing transaction data
 ```
 
-In node2, type the following to save the transaction's input data as a variable and convert the hash to Utf8:
+Once the transaction has been mined, it can be viewed with the following code:
 ```
 tx = getTransaction(<transaction hash>).input
 web3.toUtf8(tx)
 ```
 
 # Viewing transaction data
+The following scripts make use of a few nodejs modules. Navigate to /local-geth and execute:
+```
+npm install web3
+npm install yargs
+```
+
 ## getTx-v2.js
-## checkTx.js
-checkTx.js checks each new block, and runs getTx() if the block contains at least one transaction.     
-getTx() will display all the transactions from the last 500 blocks (or the entire blockchain, if it's less than 500 blocks long).     
-Note: getTx.js will need to be loaded in.      
+getTx-v2 returns all transactions on a node within a certain range and outputs them to log.txt.           
+Make sure that the node whose transactions you want to get is running with a WebSocket address and port.                   
+Execute the following in a new terminal instance:
 ```
-loadScript("checkTx.js")
-```
-
-
-## saveTx.sh
-In a new terminal instance, type
-```
-./saveTx.sh range node
-```
-range is an optional positve integer that denotes how many blocks before the current block to start checking transactions from. Leave it blank to default to 500.       
-       
-       
-node is an optional parameter that denotes which node to connect to. Leave blank to connect to node1.    
-*The node you are connecting to must be online.*        
-node should be in the following format:
-```
-http://rpcaddr:rpcport
-```
-rpcaddr and rpcport are defined in node1.sh and node2.sh        
-
-The output goes to ./log.txt.      
-## getTX.js
-getTx returns all transactions within a specified range, displaying the transaction hash, sender, reciever, and data.     
-If a range is provided, getTx will return all transactions (range) blocks from the latest block. If none is provided, getTx will return all transactions 500 blocks from the latest block. If the blockchain is shorter than 500 blocks, all transactions in the blockchain are returned.      
-In a node, type:
-```
-loadScript("getTX.js")
-getTx(range)
+node getTx-v2.js --close --range --connect
+# --close must be included for the file to close after it is done writing
+# --range is an optional parameter that specifies how many blocks from the latest block to start mining from
+# range is set to 500 if no value is provided, or to the whole blockchain if a value greater than the chain length is provided
+# --connect is an optional parameter that specified the wsaddr:wsport of the node to connect to
+# getTx-v2 connects to node1's addr:port by default
 ```
 
-
+# checkTx-v2.js
+checkTx-v2 will automatically run getTx-v2 everytime a block with at least one transaction is mined.                  
+Make sure that the node whose transactions you want to get is running with a WebSocket address and port.
+Execute the following in a new terminal instance:
+```
+node checkTx-v2.js --range --connect
+# --range is an optional parameter that specifies the range for getTx-v2
+# range is set to 10 if no value is provided
+# --connect is an optional parameter that specified the wsaddr:wsport of the node to connect to
+# checkTx-v2 connects to node1's addr:port by default
+```

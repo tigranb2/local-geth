@@ -84,10 +84,15 @@ node checkTx-v2.js --range --connect
 ```
 
 ## perfromance.js
-performance.js records the difference in time (milliseconds) between when a transaction is made and when it is mined.                                                        \
-The result is stored in /data/performance.txt
+performance.js records the difference in time (milliseconds) between when a transaction is made and when it is mined.    
+The result is stored in /data/performance.txt.                 
 ```
 node performance.js --connect
 # --connect is an optional parameter that specified the wsaddr:wsport of the node to connect to
 # connects to node1's addr:port by default
+```
+In order for the performance to be accurately measured, tranactions should be written with the following format: 
+```
+eth.sendTransaction({from:<from>,to:<to>,value:1,data:web3.toHex(new Date().getTime().toString() + "00")})
+// + "00" is important in order to avoid the following error: "cannot unmarshal hex string of odd length"
 ```

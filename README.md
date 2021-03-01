@@ -83,7 +83,7 @@ node checkTx-v2.js --range --connect
 # connects to node1's addr:port by default
 ```
 
-## perfromance.js
+## perfromance-v2.js
 performance.js records the difference in time (milliseconds) between when a transaction is made and when it is mined.    
 The result is stored in /data/performance.txt.                 
 ```

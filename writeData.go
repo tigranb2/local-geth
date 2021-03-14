@@ -11,6 +11,8 @@ type testData struct {
 	msg string
 }
 func main() {
+	msg1 := testData{1, "Hello World"}
+	cassandraWrite(msg1)
 }
 
 func cassandraWrite(data testData){
